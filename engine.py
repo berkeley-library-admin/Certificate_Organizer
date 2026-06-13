@@ -19,8 +19,8 @@ def format_certificate_name(raw_name):
     if len(words) == 2:
         return f"{words[0]} {words[1]}"
         
-    # List of common multi-word last name prefixes
-    compound_prefixes = {{"DELA", "DEL", "DE", "LOS", "SAN", "SANTA", "CRUZ"}}
+    # List of common multi-word last name prefixes (Fixed single brackets)
+    compound_prefixes = {"DELA", "DEL", "DE", "LOS", "SAN", "SANTA", "CRUZ"}
 
     # If the second-to-last word is a prefix, group it with the final word
     if words[-2] in compound_prefixes:
