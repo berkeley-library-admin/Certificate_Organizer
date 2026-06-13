@@ -50,4 +50,74 @@ def generate_html_page(total_processed, last_batch_count, processed_text="", inp
             .btn:hover {{ background-color: var(--accent-hover); }}
             .action-group {{ display: flex; gap: 8px; }}
             .btn-action {{ background-color: #f1f5f9; color: #475569; padding: 6px 14px; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.15s ease; }}
-            .btn-action:hover {{ background-color: #e2e8f0;
+            .btn-action:hover {{ background-color: #e2e8f0; color: #1e293b; }}
+            .btn-clear-danger {{ color: var(--danger); }}
+            .btn-clear-danger:hover {{ background-color: #fee2e2; color: var(--danger-hover); }}
+            .output-area {{ background-color: #f8fafc; border: 1px solid var(--border); padding: 14px; border-radius: 8px; white-space: pre-wrap; font-family: monospace; font-size: 15px; height: 280px; overflow-y: auto; box-sizing: border-box; }}
+            .empty-state {{ color: var(--text-muted); text-align: center; margin-top: 100px; font-style: italic; font-size: 14px; }}
+        </style>
+    </head>
+    <body>
+        <div class="navbar">
+            <h1>Certificate Organizer</h1>
+            <span class="status-badge">Live Cloud Node</span>
+        </div>
+        <div class="dashboard-container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="label">Total Processed (Session)</div>
+                    <div class="value">{total_processed}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Last Batch Count</div>
+                    <div class="value">{last_batch_count}</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">System Environment</div>
+                    <div class="value" style="font-size: 16px; margin-top: 12px; color: var(--success)">Global Web Production</div>
+                </div>
+            </div>
+            <div class="workspace-grid">
+                <div class="panel">
+                    <div class="panel-header-row">
+                        <h2 class="panel-title">Input Student Rosters</h2>
+                        <button type="button" class="btn-action btn-clear-danger" onclick="clearInput()">Clear All</button>
+                    </div>
+                    <form method="POST" style="display: flex; flex-direction: column; flex-grow: 1;">
+                        <textarea id="srcInput" name="student_names" placeholder="Type or paste names here...">{input_cache}</textarea>
+                        <button type="submit" class="btn">Generate Clean Formats</button>
+                    </form>
+                </div>
+                
+                <div class="panel">
+                    <div class="panel-header-row">
+                        <h2 class="panel-title">Standardized Certificate Roster</h2>
+                        {f'''
+                        <div class="action-group">
+                            <button type="button" class="btn-action" onclick="copyData()">Copy All</button>
+                            <button type="button" class="btn-action btn-clear-danger" onclick="clearOutput()">Clear All</button>
+                        </div>
+                        ''' if processed_text else ''}
+                    </div>
+                    {f'<div class="output-area" id="targetRoster">{processed_text}</div>' if processed_text else '<div class="output-area" id="targetRoster"><div class="empty-state">Awaiting data entry to populate roster dashboard...</div></div>'}
+                </div>
+            </div>
+        </div>
+        <script>
+            function copyData() {{
+                var text = document.getElementById("targetRoster").innerText;
+                navigator.clipboard.writeText(text);
+                alert("Roster metrics copied to clipboard!");
+            }}
+            function clearInput() {{
+                document.getElementById("srcInput").value = "";
+            }}
+            function clearOutput() {{
+                document.getElementById("targetRoster").innerHTML = '<div class="empty-state">Awaiting data entry to populate roster dashboard...</div>';
+                // Optional: If you want to clear the "Copy/Clear" buttons layout out immediately:
+                location.href = location.pathname; 
+            }}
+        </script>
+    </body>
+    </html>
+    """
