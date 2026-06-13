@@ -1,6 +1,6 @@
 # =====================================================================
 # MODULE 2: UI/UX DASHBOARD INTERFACE (interface.py)
-# Purpose: Houses the modern visual layout and stylesheet.
+# Purpose: Houses the modern visual layout, styles, and custom branding.
 # =====================================================================
 
 def generate_html_page(total_processed, last_batch_count, processed_text="", input_cache=""):
@@ -9,7 +9,7 @@ def generate_html_page(total_processed, last_batch_count, processed_text="", inp
     <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Certificate Operations Dashboard</title>
+        <title>Certificate Organizer</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
             :root {{
@@ -53,8 +53,8 @@ def generate_html_page(total_processed, last_batch_count, processed_text="", inp
     </head>
     <body>
         <div class="navbar">
-            <h1>[System] Certificate Operations</h1>
-            <span class="status-badge">Offline Node Active</span>
+            <h1>Certificate Organizer</h1>
+            <span class="status-badge">Live Cloud Node</span>
         </div>
         <div class="dashboard-container">
             <div class="stats-grid">
@@ -68,7 +68,7 @@ def generate_html_page(total_processed, last_batch_count, processed_text="", inp
                 </div>
                 <div class="stat-card">
                     <div class="label">System Environment</div>
-                    <div class="value" style="font-size: 16px; margin-top: 12px; color: var(--success)">Local LAN Network</div>
+                    <div class="value" style="font-size: 16px; margin-top: 12px; color: var(--success)">Global Web Production</div>
                 </div>
             </div>
             <div class="workspace-grid">
